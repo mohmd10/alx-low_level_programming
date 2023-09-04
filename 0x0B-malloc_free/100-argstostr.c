@@ -1,46 +1,50 @@
-#include <stdlib.h>
 #include "holberton.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
-* *argstostr - function that concatenates all the arguments of your program.
-* @ac : argument of counter
-;* @av : argument of vector
-* Return: pointer
-*/
+ * *argstostr - convert arguments on command line to strings
+ * @ac: int type
+ * @av: pointer to array
+ * Return: arguments as strings
+ */
 
 char *argstostr(int ac, char **av)
 {
-	int c, c1;
-	int a = 0;
-	int str = 0;
-	char *d;
+	int size, count, count1, count2 = 0;
+	char *ptr;
 
 	if (ac == 0 || av == NULL)
-		return (NULL);
-
-	for (c = 0 ; c < ac ; c++)
 	{
-		for (c1 = 0 ; av[c][c1] != '\0' ; c1++)
-		{
-			str++;
-		}
-		str++;
+		return (NULL);
 	}
 
-	d = malloc(sizeof(char) * str);
-
-	if (d == NULL)
-		return (NULL);
-
-	for (c = 0 ; c < ac ; c++)
+	for (count = 0; count < ac; count++)
 	{
-		for (c1 = 0 ; av[c][c1] != '\0' ; c1++)
+		for (count1 = 0; av[count][count1] != '\0'; count1++)
 		{
-			d[a] = av[c][c1];
-			a++;
+			size += 1;
 		}
-		d[a] = '\n';
-		a++;
+		size += 1;
 	}
-	return (d);
+	size += 1;
+
+	ptr = malloc(sizeof(char) * size);
+	if (ptr == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	for (count = 0; count < ac; count++)
+	{
+		for (count1 = 0; av[count][count1] != '\0'; count1++)
+		{
+			ptr[count2] = av[count][count1];
+			count2++;
+		}
+		ptr[count2] = '\n';
+		count2++;
+	}
+	ptr[count2] = '\0';
+	return (ptr);
 }
