@@ -1,68 +1,51 @@
-#include "notrebloh.h"
 #include <stdlib.h>
-#include <stdio.h>
-/**
- * _strlen - return length of a string
- *
- * @s: char type
- * Return:  length of string
- */
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; s[a] != '\0'; a++)
-	;
-	return (a);
-}
-/**
- * _strncat - function to concatnate strings with n bytes
- *
- * @dest: destination for concatnation
- * @src: source of string
- * @n: int type for size of byte
- * Return: dest
- */
-char *_strncat(char *dest, char *src, int n)
-{
-	int dest_len, a;
-
-	dest_len = _strlen(dest);
-	for (a = 0; a < n && src[a] != '\0'; a++)
-		dest[dest_len + a] = src[a];
-	return (dest);
-}
+#include "holberton.h"
 
 /**
- * *str_concat - function to allocate space for sting concatnation
- * @s1: array pointer to destination of string
- * @s2: array pointer to source of string
- * Return: return pointer to copy of string
- */
+* *str_concat - function that concatenates two strings.
+* @s1 : Pointer 1 string of in
+* @s2 : Pointer 2 string of in
+* Return: empty - NULL
+*/
 
 char *str_concat(char *s1, char *s2)
 {
-	char *ptr;
-	int size1, size2;
+	char *concat;
+	int s1i = 0, s2i = 0, n = 0, c, c1;
 
-	if (s1 == NULL)
-	{
+	if (s1 == 0)
 		s1 = "";
-	}
-	if (s2 == NULL)
-	{
+	if (s2 == 0)
 		s2 = "";
-	}
-	size1 = _strlen(s1);
-	size2 = _strlen(s2);
 
-	ptr = malloc(((size1 + size2) + 1) * sizeof(char));
-	if (ptr == NULL)
+	while (s1[s1i] != '\0')
 	{
-		return (NULL);
+		s1i++;
 	}
-	_strncat(ptr, s1, size1);
-	_strncat(ptr, s2, size2);
-	ptr += '\0';
-	return (ptr);
+
+	while (s2[s2i] != '\0')
+	{
+		s2i++;
+	}
+	s2i++;
+
+	n = s1i + s2i;
+
+	concat = malloc(sizeof(char) * n);
+
+	if (concat == NULL)
+		return (NULL);
+
+	for (c = 0 ; c < s1i ; c++)
+	{
+		concat[c] = *s1;
+		s1++;
+	}
+	for (c1 = 0 ; c1 < s2i ; c1++)
+	{
+		concat[s1i + c1] = *s2;
+		s2++;
+	}
+
+	return (concat);
 }

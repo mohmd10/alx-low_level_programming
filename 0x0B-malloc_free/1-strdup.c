@@ -1,52 +1,34 @@
-#include "notrebloh.h"
 #include <stdlib.h>
-#include <stdio.h>
+#include "holberton.h"
 
 /**
- * _strlen - return length of a string
- *
- * @s: char type
- * Return:  length of string
- */
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; s[a] != '\0'; a++)
-	{
-
-	}
-	return (a);
-}
-
-/**
- * *_strdup - function to return pointer to string
- * @str: pointer to string array input
- * Return: pointer to string created
- */
+* *_strdup - returns a pointer to a newly allocated space in memory
+* @str : Pointer in
+* Return: Copy of Pointer in
+*/
 
 char *_strdup(char *str)
 {
-	char *ptr;
-	int size;
-	int x;
+	char *cop;
+	int c, n = 0;
 
 	if (str == NULL)
-	{
 		return (NULL);
-	}
-	size = _strlen(str) + 1;
-	ptr = malloc(size * sizeof(char));
 
-	x = 0;
-	while (x < size)
+	while (str[n] != '\0')
 	{
-		if (ptr == NULL)
-		{
-			return (NULL);
+		n++;
 	}
-		ptr[x] = str[x];
-		x++;
+	n++;
+	cop = malloc(sizeof(char) * n);
+
+	if (cop == NULL)
+		return (NULL);
+
+	for (c = 0 ; str[c] != '\0' ; c++)
+	{
+		cop[c] = str[c];
 	}
-	return (ptr);
+
+	return (cop);
 }
