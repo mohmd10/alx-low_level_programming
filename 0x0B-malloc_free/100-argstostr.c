@@ -1,50 +1,56 @@
-#include "holberton.h"
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "main.h"
 /**
- * *argstostr - convert arguments on command line to strings
- * @ac: int type
- * @av: pointer to array
- * Return: arguments as strings
- */
+* argstostr - a function that concatenates all the arguments of your program
+*@ac: count of args passed to the function
+*@av:array of arguments
+*
+*Return: pointer to the new string
+*/
 
 char *argstostr(int ac, char **av)
 {
-	int size, count, count1, count2 = 0;
-	char *ptr;
+		char *new_string = NULL;
+		int k = 0, i = ac, j, sum = 0, temp = 0;
 
-	if (ac == 0 || av == NULL)
-	{
-		return (NULL);
-	}
+		if (ac == 0 || av == NULL)
+			return (NULL);
 
-	for (count = 0; count < ac; count++)
-	{
-		for (count1 = 0; av[count][count1] != '\0'; count1++)
+		while (ac--)
+			sum += (len(av[ac]) + 1);
+		new_string = (char *) malloc(sum + 1);
+
+		if (new_string != NULL)
 		{
-			size += 1;
+			while (k < i)
+			{
+				for (j = 0; av[k][j] != '\0'; j++)
+					new_string[j + temp] = av[k][j];
+				new_string[temp + j] = '\n';
+				temp += (j + 1);
+				k++;
+			}
+			new_string[temp] = '\0';
 		}
-		size += 1;
-	}
-	size += 1;
-
-	ptr = malloc(sizeof(char) * size);
-	if (ptr == NULL)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	for (count = 0; count < ac; count++)
-	{
-		for (count1 = 0; av[count][count1] != '\0'; count1++)
+		else
 		{
-			ptr[count2] = av[count][count1];
-			count2++;
+			return (NULL);
 		}
-		ptr[count2] = '\n';
-		count2++;
-	}
-	ptr[count2] = '\0';
-	return (ptr);
+		return (new_string);
+}
+
+/**
+*len - returns length of str
+*@str: string counted
+*Return: returns the length
+*/
+int len(char *str)
+{
+		int len = 0;
+
+		if (str != NULL)
+		{
+			while (str[len])
+				len++;
+		}
+	return (len);
 }
