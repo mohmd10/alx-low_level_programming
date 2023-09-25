@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdio.h>
 #include "lists.h"
 
@@ -10,14 +10,14 @@
  */
 size_t print_listint(const listint_t *h)
 {
-    size_t count = 0;  // Initialize a counter to keep track of nodes
+    size_t node_count = 0; // Initialize a counter for nodes
 
     while (h != NULL)
     {
         printf("%d\n", h->n); // Print the value of the current node
         h = h->next; // Move to the next node
-        count++; // Increment the counter
+        node_count++; // Increment the node count
     }
 
-    return (count); // Return the number of nodes
+    return (node_count); // Return the number of nodes
 }
